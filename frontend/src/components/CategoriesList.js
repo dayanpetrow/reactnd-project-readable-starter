@@ -18,10 +18,10 @@ class CategoriesList extends Component {
     const { categories } = this.props
 
     return (
-        <div>
-          <Link key={'all'} to={`/`}>All </Link>
+        <div className="categories">
+          <Link key={'all'} to={`/`}>All</Link>
           {categories && categories.map(category => (
-            <Link key={category.name} to={`/${category.path}`}>{capitalize(category.name)} </Link>
+            <Link key={category.name} to={`/${category.path}`}>{capitalize(category.name)}</Link>
           ))}
         </div>
     );
