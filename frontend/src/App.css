@@ -3,6 +3,7 @@ body {
 }
 
 .App {
+  width: 100%;
   text-align: center;
   height: auto;
 }
@@ -53,4 +54,25 @@ body {
 .container {
   width: 900px;
   margin: 0px auto;
+}
+
+.post-container {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 15px 1px #aaa;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    width: 90%;
+  }
+  .post-container {
+    padding: 20px 0;
+  }
+}
+
+.bold {
+  font-weight: 600;
 }
