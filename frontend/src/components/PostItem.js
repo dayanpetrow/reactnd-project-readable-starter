@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { capitalize } from '../utils/helpers';
 
 class PostItem extends Component {
@@ -9,13 +9,14 @@ class PostItem extends Component {
 
     return (
         <div className="post-container">
-          <h3>{ post.title }</h3>
+          <h3><Link to={`/${post.category}/${post.id}`}>{ post.title }</Link></h3>
           <p>
-            Posted by <span class="bold">{ post.author }</span> in <span class="bold">{ capitalize(post.category) }</span> on <span class="bold">{ post.timestamp }</span>
+            Posted by <span className="bold">{ post.author }</span> in <span className="bold">{ capitalize(post.category) }</span> on <span className="bold">{ post.timestamp }</span>
           </p>
-          <p>{ post.body }</p>
+          <p className="post-content">{ post.body }</p>
           <p>Vote score: { post.voteScore }</p>
           <p>Comment count: { post.commentCount }</p>
+          <button className="details">Read post</button>
         </div>
     );
   }

@@ -17,7 +17,6 @@ class PostsList extends Component {
 
   render() {
     const { posts } = this.props
-
     return (
         <div className="container">
           {posts && posts.map( post => (
@@ -28,9 +27,10 @@ class PostsList extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts }, { match }) {
+  const category = match.params.category
   return {
-    posts: posts
+    posts: category ? posts.filter(post => post.category === category) : posts
   }
 }
 
