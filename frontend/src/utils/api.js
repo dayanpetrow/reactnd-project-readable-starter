@@ -18,6 +18,10 @@ export const fetchAllPosts = () => {
   return fetch(`${API}/posts`, { headers }).then(res => res.json())
 }
 
-export const fetchPostComments = (_id) => {
-  return fetch(`${API}/posts/${_id}/comments`, { headers }).then(res => res.json())
+export const fetchPostComments = (post_id) => {
+  return fetch(`${API}/posts/${post_id}/comments`, { headers }).then(res => res.json())
+}
+
+export const fetchPost = (post_id) => {
+  return fetch(`${API}/posts/${post_id}`, { headers }).then(res => res.json())
 }

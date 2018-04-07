@@ -13,11 +13,10 @@ class App extends Component {
       <div className="App">
         <Header />
         <CategoriesList />
-
         <Switch>
           <Route exact path="/" component={PostsList} />
           <Route exact path="/:category" component={PostsList} />
-          //<Route exact path="/:category/:postId" component={PostView} />
+          <Route exact path="/:category/:postId" component={PostView} />
         </Switch>
       </div>
     );

@@ -12,3 +12,15 @@ export const fetchAllPosts = () => {
     })
   }
 }
+
+export const fetchPost = (post_id) => {
+  return (dispatch) => {
+    API.fetchPost(post_id).then(res => {
+      console.log("single post : coming from action", res)
+      dispatch({
+        type: Types.FETCH_POST_DETAILS,
+        res
+      })
+    })
+  }
+}
