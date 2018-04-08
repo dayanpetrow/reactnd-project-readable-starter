@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
-import '../App.css';
+import '../assets/App.css';
 import { Route, Switch } from 'react-router-dom';
 import CategoriesList from './CategoriesList';
 import Header from './Header';

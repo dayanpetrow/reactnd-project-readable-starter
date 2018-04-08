@@ -56,7 +56,8 @@ a:hover, a:focus {
   margin: 30px 0;
 }
 
-.categories > a {
+.categories > a,
+.no-posts > a {
   padding: 10px 20px;
   margin: 0px 10px;
   background-color: #333;
@@ -67,6 +68,13 @@ a:hover, a:focus {
 
 .categories > .newpost {
   background-color: green;
+}
+
+.no-posts > .newpost {
+  background-color: orange;
+  max-width: 150px;
+  display: block;
+  margin: 20px auto;
 }
 
 .categories > a:hover {

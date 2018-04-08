@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchAllPosts } from '../../actions/posts';
 import { connect } from 'react-redux';
 //import { capitalize } from '../utils/helpers';
@@ -19,9 +19,16 @@ class PostsList extends Component {
     const { posts } = this.props
     return (
         <div className="container">
-          {posts && posts.map( post => (
-            <PostItem post={post} key={post.id} />
-          ))}
+          {posts.length > 0
+            ?
+            posts.map( post => (
+              <PostItem post={post} key={post.id} />
+            ))
+            :
+            <div className="no-posts">
+              There are no posts in this category.
+            </div>
+            }
         </div>
     );
   }
