@@ -8,6 +8,11 @@ body {
   height: auto;
 }
 
+.container {
+  width: 900px;
+  margin: 0px auto;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 30px;
@@ -33,6 +38,20 @@ body {
   to { transform: rotate(360deg); }
 }
 
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2d67c4;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* ********************
+ * CATEGORIES STYLING *
+ * ******************** */
+
 .categories {
   margin: 30px 0;
 }
@@ -46,40 +65,98 @@ body {
   box-shadow: 0px 0px 15px 1px #aaa;
 }
 
+.categories > .newpost {
+  background-color: green;
+}
+
 .categories > a:hover {
   transition: all 0.5s easy;
   text-decoration: underline;
 }
 
-.container {
-  width: 900px;
-  margin: 0px auto;
-}
+/* ********************
+ * POSTS STYLING *
+ * ******************** */
 
 .post-container {
   width: 100%;
-  margin: 20px 0;
-  padding: 20px;
+  max-width: 900px;
+  margin: 10px 0;
+  padding: 10px 0;
   background-color: white;
   box-shadow: 0px 0px 15px 1px #aaa;
 }
+
+.post-title {
+  padding: 0px 10px 0px 10px;
+  margin-bottom: 10px;
+}
+
+.post-details {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.post-counts {
+  display: inline-block;
+  margin: 10px;
+}
+
+.read-post {
+  max-width: 100px;
+  text-align: center;
+  display: block;
+  padding: 10px 15px;
+  margin: 10px auto;
+  background-color: #333;
+  color: white;
+  font-weight: normal
+}
+
+/* ********************
+ * COMMENTS STYLING *
+ * ******************** */
 
 .comments-container {
   width: 70%;
   margin: 0px auto;
 }
 
+@media screen and (max-width: 768px) {
+  .comments-container {
+    width: 100%;
+  }
+}
+
 .comment {
   margin: 10px;
+  padding: 10px;
   background-color: white;
+}
+
+.comment:hover {
+  border-right: 3px solid #333;
+  border-left: 3px solid #333;
+}
+
+.comment-details {
+  font-size: 14px;
+}
+
+.comment-content {
+  font-size: 14px;
 }
 
 @media screen and (max-width: 900px) {
   .container {
-    width: 90%;
+    width: 100%;
+    margin: 0px auto;
   }
   .post-container {
-    padding: 20px 0;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px 20px;
   }
 }
 

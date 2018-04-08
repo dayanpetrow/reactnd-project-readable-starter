@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
-import { fetchAllPosts } from '../actions/posts';
+import { fetchAllPosts } from '../../actions/posts';
 import { connect } from 'react-redux';
 //import { capitalize } from '../utils/helpers';
 import PostItem from './PostItem'

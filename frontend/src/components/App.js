@@ -4,8 +4,8 @@ import '../App.css';
 import { Route, Switch } from 'react-router-dom';
 import CategoriesList from './CategoriesList';
 import Header from './Header';
-import PostsList from './PostsList';
-import PostView from './PostView';
+import PostsList from './post/PostsList';
+import PostView from './post/PostView';
 
 class App extends Component {
   render() {
