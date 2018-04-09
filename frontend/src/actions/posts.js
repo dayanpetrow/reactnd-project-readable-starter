@@ -35,6 +35,17 @@ export const addPost = (post, callback) => {
   }
 }
 
+export const votePost = (post_id, option) => {
+  return (dispatch) => {
+    API.votePost(post_id, option).then(post => {
+      dispatch({
+        type: Types.VOTE_POST,
+        post
+      })
+    })
+  }
+}
+
 export const deletePost = (post_id, callback) => {
   return (dispatch) => {
     API.deletePost(post_id).then(() => callback())

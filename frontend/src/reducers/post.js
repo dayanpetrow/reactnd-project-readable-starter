@@ -8,6 +8,10 @@ function post(state={}, action) {
       return action.res
     case Types.ADD_POST:
       return post
+    case Types.VOTE_POST:
+      if(action.vote_option === "upVote")   post.voteScore += 1
+      if(action.vote_option === "downVote") post.voteScore -= 1
+      return post
     default:
       return state
   }

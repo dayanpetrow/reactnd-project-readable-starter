@@ -131,6 +131,19 @@ label, button {
   margin-top: 20px;
 }
 
+.vote-button {
+  display: inline-block;
+  color: white;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+
 /* ********************
  * COMMENTS STYLING *
  * ******************** */

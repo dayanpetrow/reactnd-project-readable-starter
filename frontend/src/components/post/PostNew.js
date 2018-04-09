@@ -26,33 +26,29 @@ class PostNew extends Component {
   }
 
   render() {
+    const { history, categories } = this.props
     return (
       <div className="container">
         <div className="post-container">
-
           <h3 className="post-title">Add new post:</h3>
 
           <form onSubmit={this.submitPost}>
-
             <label htmlFor="title">Title</label>
             <input type="text" id="title" name="title" size="35"/>
-
             <label htmlFor="author">Author</label>
             <input type="text" id="author" name="author" size="35"/>
-
             <label htmlFor="category">Category</label>
             <select id="category" name="category" className="field-select">
-              {this.props.categories && this.props.categories.map((category) => (
+              {categories && categories.map((category) => (
                 <option key={category.name} value={category.name}>{category.name}</option>
               ))}
             </select>
-
             <label htmlFor="content">Test</label>
             <textarea type="text" id="content" rows="4" cols="60" />
-
             <button type="submit">Add post</button>
           </form>
-          <button onClick={event => this.props.history.goBack()}>Go back</button>
+
+          <button onClick={event => history.goBack()}>Go back</button>
         </div>
       </div>
     );

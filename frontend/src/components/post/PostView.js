@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as helpers from '../../utils/helpers';
 import { fetchPostComments } from '../../actions/comments'
-import { fetchPost, deletePost } from '../../actions/posts'
+import { fetchPost, deletePost, votePost } from '../../actions/posts'
 import Comment from '../Comment'
 
 class PostView extends Component {
@@ -24,6 +24,14 @@ class PostView extends Component {
 
   deletePost(post_id) {
     this.props.deletePost(post_id, () => this.props.history.push(`/`))
+  }
+
+  upVote(post_id) {
+    this.props.votePost(post_id, "upVote")
+  }
+
+  downVote(post_id) {
+    this.props.votePost(post_id, "downVote")
   }
 
   componentWillMount() {
@@ -47,7 +55,11 @@ class PostView extends Component {
             </p>
 
             <p className="post-content">{ post.body }</p>
-            <div className="post-counts">Votes: { post.voteScore }</div>
+            <div className="post-counts">
+              Votes: { post.voteScore }
+              <button className="vote-button green" onClick={event => this.upVote(post.id)}>Up</button>
+              <button className="vote-button red" onClick={event => this.downVote(post.id)}>Down</button>
+            </div>
             <div className="post-counts">Comments: { post.commentCount }</div>
 
             <button onClick={event => this.deletePost(post.id)}>Delete post</button>
@@ -98,5 +110,6 @@ function mapStateToProps({ post, comments }) {
 export default connect(mapStateToProps, {
   fetchPost,
   fetchPostComments,
-  deletePost
+  deletePost,
+  votePost
 })(PostView)
