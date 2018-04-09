@@ -25,3 +25,11 @@ export const fetchPostComments = (post_id) => {
 export const fetchPost = (post_id) => {
   return fetch(`${API}/posts/${post_id}`, { headers }).then(res => res.json())
 }
+
+export const addPost = (post) => {
+  return fetch(`${API}/posts`, { method: 'POST', headers, body: JSON.stringify(post) })
+}
+
+export const deletePost = (post_id) => {
+  return fetch(`${API}/posts/${post_id}`, { method: 'DELETE', headers}).then(res => res.json)
+}

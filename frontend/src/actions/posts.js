@@ -24,3 +24,23 @@ export const fetchPost = (post_id) => {
     })
   }
 }
+
+export const addPost = (post, callback) => {
+  return (dispatch) => {
+    API.addPost(post).then(() => callback())
+    dispatch({
+      type: Types.ADD_POST,
+      post
+    })
+  }
+}
+
+export const deletePost = (post_id, callback) => {
+  return (dispatch) => {
+    API.deletePost(post_id).then(() => callback())
+    dispatch({
+      type: Types.DELETE_POST,
+      post_id
+    })
+  }
+}

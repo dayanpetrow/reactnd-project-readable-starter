@@ -122,6 +122,15 @@ a:hover, a:focus {
   font-weight: normal
 }
 
+label, input, button {
+  display: block;
+  margin: 0px auto;
+}
+
+label, button {
+  margin-top: 20px;
+}
+
 /* ********************
  * COMMENTS STYLING *
  * ******************** */

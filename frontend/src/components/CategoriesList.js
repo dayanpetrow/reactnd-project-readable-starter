@@ -23,7 +23,7 @@ class CategoriesList extends Component {
           {categories && categories.map(category => (
             <Link key={category.name} to={`/${category.path}`}>{capitalize(category.name)}</Link>
           ))}
-          <Link className="newpost" key={'newpost'} to={`/newpost`}>New post</Link>
+          <Link className="newpost" key={'newpost'} to={`/posts/new`}>New post</Link>
         </div>
     );
   }

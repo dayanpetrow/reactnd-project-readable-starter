@@ -4,13 +4,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as helpers from '../../utils/helpers';
 import { fetchPostComments } from '../../actions/comments'
-import { fetchPost } from '../../actions/posts'
+import { fetchPost, deletePost } from '../../actions/posts'
 import Comment from '../Comment'
 
 class PostView extends Component {
   static propTypes = {
     post: PropTypes.object,
     comments: PropTypes.array
+  }
+
+  state = {
+    showNewComment: false
+  }
+
+  showComment() {
+    this.state.showNewComment ?
+    this.setState({showNewComment: false}) : this.setState({showNewComment: true});
+  }
+
+  deletePost(post_id) {
+    this.props.deletePost(post_id, () => this.props.history.push(`/`))
   }
 
   componentWillMount() {
@@ -23,6 +36,7 @@ class PostView extends Component {
 
     return (
       <div className="container">
+        <button onClick={event => this.props.history.goBack()}>Back</button>
         <div className="post-view">
           <div className="post-container">
 
@@ -36,14 +50,36 @@ class PostView extends Component {
             <div className="post-counts">Votes: { post.voteScore }</div>
             <div className="post-counts">Comments: { post.commentCount }</div>
 
+            <button onClick={event => this.deletePost(post.id)}>Delete post</button>
+
+          </div>
+
+          <div className="new-comment">
+            {this.state.showNewComment
+              ?
+              <div className="comment">
+                <form>
+                  <p>{ this.state.showNewComment }</p>
+                  <label htmlFor="author">Author</label>
+                  <input type="text" id="author" name="author" size="35"/>
+
+                  <label htmlFor="content">Test</label>
+                  <textarea type="text" id="content" rows="4" cols="60" />
+                  <button type="submit">Add</button>
+                  <button onClick={event => this.showComment()}>Cancel</button>
+                </form>
+              </div>
+              :
+              <button onClick={event => this.showComment()}>Add comment</button>
+            }
+
           </div>
           <div className="comments-container">
             {
-            comments.length > 0
-            ? comments.map(comment => (
+            comments.length > 0 &&
+            comments.map(comment => (
                 <Comment key={comment.id} comment={comment} />
               ))
-            : <div>Be the first to comment on this post!</div>
             }
           </div>
         </div>
@@ -61,5 +97,6 @@ function mapStateToProps({ post, comments }) {
 
 export default connect(mapStateToProps, {
   fetchPost,
-  fetchPostComments
+  fetchPostComments,
+  deletePost
 })(PostView)
