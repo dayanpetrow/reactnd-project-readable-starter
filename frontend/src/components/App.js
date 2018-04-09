@@ -7,6 +7,7 @@ import Header from './Header';
 import PostsList from './post/PostsList';
 import PostView from './post/PostView';
 import PostNew from './post/PostNew';
+import PostEdit from './post/PostEdit';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={PostsList} />
           <Route exact path="/posts/new" component={PostNew} />
+          <Route exact path="/posts/edit/:postId" component={PostEdit} />
           <Route exact path="/:category" component={PostsList} />
           <Route exact path="/:category/:postId" component={PostView} />
 

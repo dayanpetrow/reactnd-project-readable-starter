@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
 import * as helpers from '../../utils/helpers';
-import { fetchCategories } from '../../actions/categories';
+import { fetchPost } from '../../actions/posts';
 import { addPost } from '../../actions/posts';
 import { connect } from 'react-redux';
 
-class PostNew extends Component {
+class PostEdit extends Component {
   static propTypes = {
-    categories: PropTypes.array
+    post: PropTypes.object
+  }
+
+  componentWillMount() {
+    this.props.fetchPost(this.props.match.params.postId)
   }
 
   submitPost = (event) => {
@@ -26,7 +30,7 @@ class PostNew extends Component {
   }
 
   render() {
-    const { history, categories } = this.props
+    const { post, history } = this.props
     return (
       <div className="container">
         <div className="post-container">
@@ -34,34 +38,25 @@ class PostNew extends Component {
 
           <form onSubmit={this.submitPost}>
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" name="title" size="35"/>
-            <label htmlFor="author">Author</label>
-            <input type="text" id="author" name="author" size="35"/>
-            <label htmlFor="category">Category</label>
-            <select id="category" name="category" className="field-select">
-              {categories && categories.map((category) => (
-                <option key={category.name} value={category.name}>{category.name}</option>
-              ))}
-            </select>
+            <input type="text" id="title" name="title" size="35" defaultValue={post.title} />
             <label htmlFor="content">Content</label>
-            <textarea type="text" id="content" rows="4" cols="60" />
-            <button type="submit">Add post</button>
+            <textarea type="text" id="content" rows="4" cols="60" defaultValue={post.body} />
+            <button type="submit">Update post</button>
           </form>
 
-          <button onClick={event => history.goBack()}>Go back</button>
+          <button onClick={event => history.push(`/${post.category}/${post.id}`)}>Cancel</button>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ post }) {
   return {
-    categories: categories
+    post: post
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchCategories,
-  addPost
-})(PostNew)
+  fetchPost
+})(PostEdit)
