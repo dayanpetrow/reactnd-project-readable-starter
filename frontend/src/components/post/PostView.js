@@ -63,7 +63,7 @@ class PostView extends Component {
             <div className="post-counts">Comments: { post.commentCount }</div>
 
             <button onClick={event => this.deletePost(post.id)}>Delete post</button>
-            <button onClick={event => this.props.history.push(`/posts/edit/${post.id}`)}>Edit post</button>
+            <button onClick={event => this.props.history.push(`/posts/${post.id}/edit`)}>Edit post</button>
 
           </div>
 

@@ -15,6 +15,10 @@ class PostEdit extends Component {
     this.props.fetchPost(this.props.match.params.postId)
   }
 
+  handleInputChange(event) {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
   submitPost = (event) => {
     event.preventDefault();
     const _ = event.target
@@ -31,20 +35,22 @@ class PostEdit extends Component {
 
   render() {
     const { post, history } = this.props
+
     return (
       <div className="container">
         <div className="post-container">
-          <h3 className="post-title">Add new post:</h3>
+          <h3 className="post-title">Edit post:</h3>
 
           <form onSubmit={this.submitPost}>
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" name="title" size="35" defaultValue={post.title} />
+            <input type="text" id="title" onChange={this.handleInputChange} name="title" size="35" ref="title" value={post.title || 'undefined'} />
             <label htmlFor="content">Content</label>
-            <textarea type="text" id="content" rows="4" cols="60" defaultValue={post.body} />
+            <p>{ post. title}</p>
+            <textarea type="text" id="content" onChange={this.handleInputChange} rows="4" cols="60" value={post.body || 'undefined'} />
             <button type="submit">Update post</button>
           </form>
 
-          <button onClick={event => history.push(`/${post.category}/${post.id}`)}>Cancel</button>
+          <button onClick={event => history.push(`/posts/${post.id}`)}>Cancel</button>
         </div>
       </div>
     );
