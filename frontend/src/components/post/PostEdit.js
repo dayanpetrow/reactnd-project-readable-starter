@@ -7,17 +7,40 @@ import { addPost } from '../../actions/posts';
 import { connect } from 'react-redux';
 
 class PostEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleContentChange = this.handleContentChange.bind(this);
+    this.state = {
+      body: '',
+      title: ''
+    }
+  }
+
   static propTypes = {
     post: PropTypes.object
   }
 
   componentWillMount() {
-    this.props.fetchPost(this.props.match.params.postId)
+    this.props.fetchPost(this.props.match.params.postId);
   }
 
-  handleInputChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+  componentWillReceiveProps(data) {
+    console.log("will receive props", data.post);
+    this.setState({ title: data.post.title });
+    this.setState({ body: data.post.body });
   }
+
+  handleTitleChange(event) {
+    console.log(this.state.title);
+    this.setState({ title: event.target.value });
+  }
+
+  handleContentChange(event) {
+    console.log(this.state.body);
+    this.setState({ body: event.target.value });
+  }
+
 
   submitPost = (event) => {
     event.preventDefault();
@@ -35,7 +58,6 @@ class PostEdit extends Component {
 
   render() {
     const { post, history } = this.props
-
     return (
       <div className="container">
         <div className="post-container">
@@ -43,10 +65,10 @@ class PostEdit extends Component {
 
           <form onSubmit={this.submitPost}>
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={this.handleInputChange} name="title" size="35" ref="title" value={post.title || 'undefined'} />
+            <input type="text" id="title" onChange={this.handleTitleChange} name="title" size="35" value={this.state.title} />
             <label htmlFor="content">Content</label>
-            <p>{ post. title}</p>
-            <textarea type="text" id="content" onChange={this.handleInputChange} rows="4" cols="60" value={post.body || 'undefined'} />
+            <p>{ post.body }</p>
+            <textarea type="text" id="body" name="body" onChange={this.handleContentChange} rows="4" cols="60" value={this.state.body} />
             <button type="submit">Update post</button>
           </form>
 
