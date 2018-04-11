@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
 import * as helpers from '../../utils/helpers';
 import { fetchPost } from '../../actions/posts';
 import { editPost } from '../../actions/posts';

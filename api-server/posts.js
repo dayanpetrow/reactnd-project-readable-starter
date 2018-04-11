@@ -24,6 +24,28 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
+  },
+  "b2i0ds3ym7mf1p33lnez": {
+    id: 'b2i0ds3ym7mf1p33lnez',
+    timestamp: 1523476600217,
+    title: 'Custom post!',
+    body: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+    author: 'dayanpetrow',
+    category: 'custom',
+    voteScore: 11,
+    deleted: false,
+    commentCount: 1
+  },
+  "b1e7cd6aa37d0e2d75376a134": {
+    id: 'b1e7cd6aa37d0e2d75376a134',
+    timestamp: 1523476781159,
+    title: 'Lorem ipsum',
+    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vestibulum purus in mattis varius. In id suscipit purus. Suspendisse interdum ex tellus, vitae porta massa pharetra et. Etiam massa velit, pulvinar sit amet molestie ut, aliquam sit amet lacus. Sed quis interdum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie, risus sed sollicitudin ultricies, felis sem lacinia neque, a sagittis lacus sem id nunc.`,
+    author: 'dayanpetrow',
+    category: 'react',
+    voteScore: 8,
+    deleted: false,
+    commentCount: 0
   }
 }
 

@@ -14,6 +14,10 @@ const defaultData = {
         path: 'redux'
       },
       {
+        name: 'custom',
+        path: 'custom'
+      },
+      {
         name: 'udacity',
         path: 'udacity'
       }

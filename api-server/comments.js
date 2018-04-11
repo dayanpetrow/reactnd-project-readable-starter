@@ -23,6 +23,16 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     parentDeleted: false
+  },
+  "8tu4dido805n8un48ve89": {
+    id: '8tu4dido805n8un48ve89',
+    parentId: "b2i0ds3ym7mf1p33lnez",
+    timestamp: 1523476839241,
+    body: 'Integer maximus enim vitae elit ornare lacinia. Etiam feugiat ligula sed turpis convallis, ac sagittis sapien consequat.',
+    author: 'dayanpetrow',
+    voteScore: 4,
+    deleted: false,
+    parentDeleted: false
   }
 }
 
