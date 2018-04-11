@@ -22,8 +22,9 @@ class PostsList extends Component {
     this.props.sortPosts(option);
     this.setState({ sort: option });
   }
+
   render() {
-    const { posts, sortPosts } = this.props
+    const { posts } = this.props
     return (
         <div className="container">
 

@@ -9,7 +9,6 @@ import FaPlus from 'react-icons/lib/fa/plus'
 import FaMinus from 'react-icons/lib/fa/minus'
 import FaDelete from 'react-icons/lib/fa/trash'
 import FaEdit from 'react-icons/lib/fa/pencil-square'
-import FaBack from 'react-icons/lib/fa/angle-double-left'
 
 class SingleComment extends Component {
 
@@ -89,7 +88,7 @@ class SingleComment extends Component {
               </div>
             </form>
           }
-          
+
         </div>
     );
   }

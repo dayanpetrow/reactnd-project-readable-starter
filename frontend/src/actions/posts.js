@@ -4,7 +4,6 @@ import * as API from '../utils/api'
 export const fetchAllPosts = () => {
   return (dispatch) => {
     API.fetchAllPosts().then(posts => {
-      console.log("posts : coming from action", posts)
       dispatch({
         type: Types.FETCH_ALL_POSTS,
         posts
@@ -16,7 +15,6 @@ export const fetchAllPosts = () => {
 export const fetchPost = (post_id) => {
   return (dispatch) => {
     API.fetchPost(post_id).then(post => {
-      console.log("single post : coming from action", post)
       dispatch({
         type: Types.FETCH_POST_DETAILS,
         post

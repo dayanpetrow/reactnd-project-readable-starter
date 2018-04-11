@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../assets/logo.svg';
-import { Link } from 'react-router-dom';
 
 class Footer extends Component {
   render() {
@@ -8,8 +6,9 @@ class Footer extends Component {
       <div className="header footer">
         <header className="App-header">
           <div className="footer-links">
-            <a href="http://dayanpetrow.eu" target="_blank">Personal website</a>
-            <a href="https://github.com/dayanpetrow/reactnd-project-readable-starter">Github repository</a>
+            <a href="http://dayanpetrow.eu" target="_blank" rel="noopener noreferrer">Personal website</a>
+            <a href="https://github.com/dayanpetrow/reactnd-project-readable-starter"
+              target="_blank" rel="noopener noreferrer">Github repository</a>
           </div>
         </header>
       </div>
