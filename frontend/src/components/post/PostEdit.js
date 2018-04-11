@@ -62,11 +62,13 @@ class PostEdit extends Component {
             <label htmlFor="title">Title</label>
             <input type="text" id="title" onChange={this.handleTitleChange} name="title" size="35" value={this.state.title} />
             <label htmlFor="content">Content</label>
-            <textarea type="text" id="body" name="body" onChange={this.handleContentChange} rows="4" cols="60" value={this.state.body} />
-            <button type="submit">Update post</button>
+            <textarea className="post-textarea" type="text" id="body" name="body" onChange={this.handleContentChange} rows="4" cols="60" value={this.state.body} />
+            <div class="inline-buttons">
+              <button type="submit">Update post</button>
+              <button onClick={event => history.push(`/posts/${post.id}`)}>Cancel</button>
+            </div>
           </form>
 
-          <button onClick={event => history.push(`/posts/${post.id}`)}>Cancel</button>
         </div>
       </div>
     );

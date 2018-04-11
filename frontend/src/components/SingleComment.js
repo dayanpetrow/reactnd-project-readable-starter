@@ -4,6 +4,12 @@ import * as helpers from '../utils/helpers';
 import { deleteComment, voteComment, editComment } from '../actions/comments';
 import { connect } from 'react-redux';
 
+/* icons */
+import FaPlus from 'react-icons/lib/fa/plus'
+import FaMinus from 'react-icons/lib/fa/minus'
+import FaDelete from 'react-icons/lib/fa/trash'
+import FaEdit from 'react-icons/lib/fa/pencil-square'
+import FaBack from 'react-icons/lib/fa/angle-double-left'
 
 class SingleComment extends Component {
 
@@ -59,25 +65,31 @@ class SingleComment extends Component {
 
     return (
         <div className="comment">
-          <p className="comment-details">Posted by <span className="bold">{ comment.author }</span> on <span className="bold">{ helpers.printDate(comment.timestamp) }</span></p>
+
+          <div className="post-actions">
+            <button className="delete-button" onClick={event => this.deleteComment(comment.id)}><FaDelete /> delete comment</button>|
+            <button className="edit-button" onClick={event => this.switchMode()}><FaEdit /> { this.state.read_mode ? 'edit comment' : 'cancel edit'}</button>|
+            <button className="upvote-button" onClick={event => this.upVote(comment.id)}><FaPlus /> upvote</button>|
+            <button className="downvote-button" onClick={event => this.downVote(comment.id)}><FaMinus /> downvote</button>
+          </div>
+
+          <p className="comment-details">
+            Posted by <span className="bold">{ comment.author }</span> on
+            <span className="bold"> { helpers.printDate(comment.timestamp) } </span>
+            | Votes: { this.state.localVoteScore }
+            </p>
           {this.state.read_mode ?
             <p className="comment-content">{ comment.body }</p>
             :
             <form onSubmit={this.editComment}>
-              <label htmlFor="content">Edit comment:</label>
-              <textarea type="text" id="body" name="body" onChange={this.handleCommentChange} rows="4" cols="60" value={this.state.comment} />
-              <button type="submit">Update comment</button>
+              <textarea className="comment-textarea" type="text" id="body" name="body" onChange={this.handleCommentChange} rows="2" cols="60" value={this.state.comment} />
+              <div className="inline-buttons">
+                <button type="submit">Update comment</button>
+                <button onClick={event => this.switchMode()}>Cancel</button>
+              </div>
             </form>
           }
-
-          <div className="post-counts">
-            Votes: { this.state.localVoteScore }
-            <button className="vote-button green" onClick={event => this.upVote(comment.id)}>Up</button>
-            <button className="vote-button red" onClick={event => this.downVote(comment.id)}>Down</button>
-          </div>
-
-          <button onClick={event => this.switchMode()}>{ this.state.read_mode ? 'Edit post' : 'Cancel'}</button>
-          <button onClick={event => this.deleteComment(comment.id)}>Delete post</button>
+          
         </div>
     );
   }

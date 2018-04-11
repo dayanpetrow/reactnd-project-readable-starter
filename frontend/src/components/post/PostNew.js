@@ -44,11 +44,14 @@ class PostNew extends Component {
               ))}
             </select>
             <label htmlFor="content">Content</label>
-            <textarea type="text" id="content" rows="4" cols="60" />
-            <button type="submit">Add post</button>
+            <textarea className="post-textarea" type="text" id="content" cols="60" />
+            <div className="inline-buttons">
+              <button type="submit">Add post</button>
+              <button onClick={event => history.goBack()}>Go back</button>
+            </div>
           </form>
 
-          <button onClick={event => history.goBack()}>Go back</button>
+
         </div>
       </div>
     );
