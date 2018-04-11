@@ -40,10 +40,6 @@ export const votePost = (post_id, option) => {
     body: JSON.stringify({option})}).then(res => res.json())
 }
 
-export const commentCount = (post_id) => {
-  console.log("comment count");
-  return fetch(`${API}/posts/${post_id}/comments`, { headers }).then(res => res.json()).length
-}
 
 /* =========================
  * COMMENT API *
@@ -68,4 +64,9 @@ export const deleteComment = (comment_id) => {
 export const voteComment = (comment_id, option) => {
   return fetch(`${API}/comments/${comment_id}`, { method: 'POST', headers,
     body: JSON.stringify({option})}).then(res => res.json())
+}
+
+export const editComment = (comment_id, values) => {
+  return fetch(`${API}/comments/${comment_id}`, { method: 'PUT', headers, body: JSON.stringify(values) })
+    .then(res => res.json())
 }

@@ -13,3 +13,19 @@ export function generateId() {
   }
   return fragment() + fragment() + fragment() + fragment() + fragment()
 }
+
+export function sort_by_timestamp(a, b) {
+  if(a.timestamp < b.timestamp) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
+
+export function sort_by_voteScore(a, b) {
+  if(a.voteScore < b.voteScore) {
+    return 1;
+  } else {
+    return -1;
+  }
+}

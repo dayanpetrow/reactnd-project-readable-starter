@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as helpers from '../utils/helpers';
-import { deleteComment, voteComment } from '../actions/comments';
+import { deleteComment, voteComment, editComment } from '../actions/comments';
 import { connect } from 'react-redux';
 
 
 class SingleComment extends Component {
 
-  state = {
-    read_mode: false,
-    localVoteScore: this.props.comment.voteScore
+  constructor(props) {
+    super(props);
+    this.handleCommentChange = this.handleCommentChange.bind(this);
+    this.state = {
+      comment: this.props.comment.body,
+      read_mode: true,
+      localVoteScore: this.props.comment.voteScore
+    }
+  }
+
+  handleCommentChange(event) {
+    this.setState({ comment: event.target.value });
+  }
+
+  switchMode() {
+    this.state.read_mode ?
+    this.setState({read_mode: false}) : this.setState({read_mode: true});
   }
 
   deleteComment(comment_id) {
@@ -26,6 +40,16 @@ class SingleComment extends Component {
     this.props.voteComment(comment_id, "downVote")
   }
 
+  editComment = (event) => {
+    event.preventDefault();
+    const new_values = {
+      timestamp: Date.now(),
+      body: this.state.comment,
+    }
+    this.props.editComment(this.props.comment.id, new_values);
+    this.switchMode();
+  }
+
   render() {
     const { comment } = this.props
 
@@ -35,7 +59,11 @@ class SingleComment extends Component {
           {this.state.read_mode ?
             <p className="comment-content">{ comment.body }</p>
             :
-            <p>will edit</p>
+            <form onSubmit={this.editComment}>
+              <label htmlFor="content">Edit comment:</label>
+              <textarea type="text" id="body" name="body" onChange={this.handleCommentChange} rows="4" cols="60" value={this.state.comment} />
+              <button type="submit">Update comment</button>
+            </form>
           }
 
           <div className="post-counts">
@@ -44,6 +72,7 @@ class SingleComment extends Component {
             <button className="vote-button red" onClick={event => this.downVote(comment.id)}>Down</button>
           </div>
 
+          <button onClick={event => this.switchMode()}>{ this.state.read_mode ? 'Edit post' : 'Cancel'}</button>
           <button onClick={event => this.deleteComment(comment.id)}>Delete post</button>
         </div>
     );
@@ -58,5 +87,6 @@ function mapStateToProps({ comments }) {
 
 export default connect(mapStateToProps, {
   deleteComment,
-  voteComment
+  voteComment,
+  editComment
 })(SingleComment)

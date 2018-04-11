@@ -58,3 +58,15 @@ export const voteComment = (comment_id, option) => {
     })
   }
 }
+
+export const editComment = (comment_id, values) => {
+  return (dispatch) => {
+    API.editComment(comment_id, values).then(comment => {
+      dispatch({
+        type: Types.EDIT_COMMENT,
+        comment,
+        comment_id
+      })
+    })
+  }
+}
