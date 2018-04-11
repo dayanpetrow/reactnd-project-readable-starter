@@ -11,3 +11,7 @@ export const VOTE_POST = 'VOTE_POST'
 
 //comments actions
 export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
+export const FETCH_COMMENT = 'FETCH_COMMENT'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const VOTE_COMMENT = 'VOTE_COMMENT'

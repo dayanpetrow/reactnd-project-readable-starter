@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as helpers from '../../utils/helpers';
-import { fetchPostComments } from '../../actions/comments'
+import { fetchPostComments, addComment, fetchComment } from '../../actions/comments'
 import { fetchPost, deletePost, votePost } from '../../actions/posts'
-import Comment from '../Comment'
+import SingleComment from '../SingleComment'
 
 class PostView extends Component {
   static propTypes = {
@@ -39,8 +39,23 @@ class PostView extends Component {
     this.props.fetchPostComments(this.props.match.params.postId)
   }
 
+  addComment = (event) => {
+    const { post } = this.props
+    event.preventDefault();
+    const _ = event.target
+    const comment = {
+      id: helpers.generateId(),
+      timestamp: Date.now(),
+      body: _.comment_content.value,
+      author: _.comment_author.value,
+      parentId: post.id
+    }
+    this.showComment();
+    this.props.addComment(comment)
+  }
+
   render() {
-    const { post, comments } = this.props
+    const { post, comments, comment_count } = this.props
 
     return (
       <div className="container">
@@ -60,7 +75,7 @@ class PostView extends Component {
               <button className="vote-button green" onClick={event => this.upVote(post.id)}>Up</button>
               <button className="vote-button red" onClick={event => this.downVote(post.id)}>Down</button>
             </div>
-            <div className="post-counts">Comments: { post.commentCount }</div>
+            <div className="post-counts">Comments: { comment_count }</div>
 
             <button onClick={event => this.deletePost(post.id)}>Delete post</button>
             <button onClick={event => this.props.history.push(`/posts/${post.id}/edit`)}>Edit post</button>
@@ -71,13 +86,11 @@ class PostView extends Component {
             {this.state.showNewComment
               ?
               <div className="comment">
-                <form>
-                  <p>{ this.state.showNewComment }</p>
-                  <label htmlFor="author">Author</label>
-                  <input type="text" id="author" name="author" size="35"/>
-
-                  <label htmlFor="content">Test</label>
-                  <textarea type="text" id="content" rows="4" cols="60" />
+                <form onSubmit={this.addComment}>
+                  <label htmlFor="comment_author">Author</label>
+                  <input type="text" id="comment_author" name="comment_author" size="35"/>
+                  <label htmlFor="comment_content">Message</label>
+                  <textarea type="text" id="comment_content" name="comment_content" rows="4" cols="60" />
                   <button type="submit">Add</button>
                   <button onClick={event => this.showComment()}>Cancel</button>
                 </form>
@@ -87,11 +100,11 @@ class PostView extends Component {
             }
 
           </div>
-          <div className="comments-container">
+          <div id="comments" className="comments-container">
             {
             comments.length > 0 &&
             comments.map(comment => (
-                <Comment key={comment.id} comment={comment} />
+                <SingleComment key={comment.id} comment={comment} />
               ))
             }
           </div>
@@ -101,10 +114,11 @@ class PostView extends Component {
   }
 }
 
-function mapStateToProps({ post, comments }) {
+function mapStateToProps({ post, comments, comment_count }) {
   return {
     post: post,
-    comments: comments
+    comments: comments,
+    comment_count: comments.length
   }
 }
 
@@ -112,5 +126,7 @@ export default connect(mapStateToProps, {
   fetchPost,
   fetchPostComments,
   deletePost,
-  votePost
+  votePost,
+  addComment,
+  fetchComment
 })(PostView)

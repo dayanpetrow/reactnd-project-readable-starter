@@ -18,10 +18,6 @@ export const fetchAllPosts = () => {
   return fetch(`${API}/posts`, { headers }).then(res => res.json())
 }
 
-export const fetchPostComments = (post_id) => {
-  return fetch(`${API}/posts/${post_id}/comments`, { headers }).then(res => res.json())
-}
-
 export const fetchPost = (post_id) => {
   return fetch(`${API}/posts/${post_id}`, { headers }).then(res => res.json())
 }
@@ -41,5 +37,35 @@ export const deletePost = (post_id) => {
 
 export const votePost = (post_id, option) => {
   return fetch(`${API}/posts/${post_id}`, { method: 'POST', headers,
+    body: JSON.stringify({option})}).then(res => res.json())
+}
+
+export const commentCount = (post_id) => {
+  console.log("comment count");
+  return fetch(`${API}/posts/${post_id}/comments`, { headers }).then(res => res.json()).length
+}
+
+/* =========================
+ * COMMENT API *
+ * ========================= */
+export const fetchPostComments = (post_id) => {
+ return fetch(`${API}/posts/${post_id}/comments`, { headers }).then(res => res.json())
+}
+
+export const fetchComment = (comment_id) => {
+  return fetch(`${API}/comments/${comment_id}`, { headers }).then(res => res.json())
+}
+
+export const addComment = (comment) => {
+  fetch(`${API}/comments`, { method: 'POST', headers, body: JSON.stringify(comment) })
+  return fetch(`${API}/comments/${comment.id}`, { headers }).then(res => res.json())
+}
+
+export const deleteComment = (comment_id) => {
+  return fetch(`${API}/comments/${comment_id}`, { method: 'DELETE', headers}).then(res => res.json)
+}
+
+export const voteComment = (comment_id, option) => {
+  return fetch(`${API}/comments/${comment_id}`, { method: 'POST', headers,
     body: JSON.stringify({option})}).then(res => res.json())
 }
