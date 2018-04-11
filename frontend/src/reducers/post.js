@@ -12,6 +12,8 @@ function post(state={}, action) {
       if(action.vote_option === "upVote")   post.voteScore += 1
       if(action.vote_option === "downVote") post.voteScore -= 1
       return post
+    case Types.EDIT_POST:
+      return post
     default:
       return state
   }

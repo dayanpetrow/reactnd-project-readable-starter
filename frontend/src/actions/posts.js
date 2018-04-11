@@ -35,6 +35,17 @@ export const addPost = (post, callback) => {
   }
 }
 
+export const editPost = (post_id, values) => {
+  return (dispatch) => {
+    API.editPost(post_id, values).then(post => {
+      dispatch({
+        type: Types.EDIT_POST,
+        post
+      })
+    })
+  }
+}
+
 export const votePost = (post_id, option) => {
   return (dispatch) => {
     API.votePost(post_id, option).then(post => {
