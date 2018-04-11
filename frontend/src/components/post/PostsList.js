@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
-import { fetchAllPosts } from '../../actions/posts';
+import { fetchAllPosts, sortPosts } from '../../actions/posts';
 import { connect } from 'react-redux';
-//import { capitalize } from '../utils/helpers';
 import PostItem from './PostItem'
 
 class PostsList extends Component {
@@ -16,9 +15,19 @@ class PostsList extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, sortPosts } = this.props
     return (
         <div className="container">
+
+          {posts.length > 1 &&
+            <div className="sorts">
+              Sort by:
+              <button onClick={event => sortPosts('timestamp')}>Timestamp</button>
+              <button onClick={event => sortPosts('votescore')}>VoteScore</button>
+              <button onClick={event => sortPosts('ccount')}>Comments</button>
+            </div>
+          }
+
           {posts.length > 0
             ?
             posts.map( post => (
@@ -28,7 +37,8 @@ class PostsList extends Component {
             <div className="no-posts">
               There are no posts in this category.
             </div>
-            }
+          }
+
         </div>
     );
   }
@@ -42,5 +52,6 @@ function mapStateToProps({ posts }, { match }) {
 }
 
 export default connect(mapStateToProps, {
-  fetchAllPosts
+  fetchAllPosts,
+  sortPosts
 })(PostsList)

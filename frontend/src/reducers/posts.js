@@ -1,13 +1,23 @@
 import * as Types from '../actions/types'
+import {
+  sort_by_timestamp,
+  sort_by_ccount,
+  sort_by_voteScore
+} from '../utils/helpers'
 
 function posts(state=[], action) {
-  const { post_id } = action
   switch(action.type) {
     case Types.FETCH_ALL_POSTS:
-      console.log("posts : coming from reducer", action.res)
-      return action.res.filter(post => !(post.deleted))
+      return action.posts.sort(sort_by_timestamp)
     case Types.DELETE_POST:
-      return state.filter(post => post.id !== post_id)
+      return state.filter(post => post.id !== action.post_id)
+    case Types.SORT_POSTS:
+      if(action.sort_by_option === 'timestamp') {
+        return [].concat(state.sort(sort_by_timestamp));
+      } else if (action.sort_by_option === 'ccount') {
+        return [].concat(state.sort(sort_by_ccount));
+      }
+      return [].concat(state.sort(sort_by_voteScore));
     default:
       return state
   }

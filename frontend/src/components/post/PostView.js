@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as helpers from '../../utils/helpers';
-import { fetchPostComments, addComment, fetchComment } from '../../actions/comments'
+import { fetchPostComments, addComment } from '../../actions/comments'
 import { fetchPost, deletePost, votePost } from '../../actions/posts'
 import SingleComment from '../SingleComment'
 
@@ -127,6 +127,5 @@ export default connect(mapStateToProps, {
   fetchPostComments,
   deletePost,
   votePost,
-  addComment,
-  fetchComment
+  addComment
 })(PostView)

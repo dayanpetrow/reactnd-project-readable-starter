@@ -7,6 +7,10 @@ import { connect } from 'react-redux';
 
 class SingleComment extends Component {
 
+  static propTypes = {
+    comment: PropTypes.object
+  }
+
   constructor(props) {
     super(props);
     this.handleCommentChange = this.handleCommentChange.bind(this);

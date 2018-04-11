@@ -3,11 +3,11 @@ import * as API from '../utils/api'
 
 export const fetchAllPosts = () => {
   return (dispatch) => {
-    API.fetchAllPosts().then(res => {
-      console.log("posts : coming from action", res)
+    API.fetchAllPosts().then(posts => {
+      console.log("posts : coming from action", posts)
       dispatch({
         type: Types.FETCH_ALL_POSTS,
-        res
+        posts
       })
     })
   }
@@ -64,5 +64,12 @@ export const deletePost = (post_id, callback) => {
       type: Types.DELETE_POST,
       post_id
     })
+  }
+}
+
+export const sortPosts = (sort_by_option) => {
+  return {
+      type: Types.SORT_POSTS,
+      sort_by_option
   }
 }
