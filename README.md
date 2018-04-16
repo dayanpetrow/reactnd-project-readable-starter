@@ -14,6 +14,7 @@ To run the project:
     - `node server`
 * In another terminal window:
     - `cd frontend`
+    - `npm install`
     - `npm start`
 
 ## API Server
