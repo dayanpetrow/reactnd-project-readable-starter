@@ -18,6 +18,13 @@ function posts(state=[], action) {
         return [].concat(state.sort(sort_by_ccount));
       }
       return [].concat(state.sort(sort_by_voteScore));
+    case Types.VOTE_POST:
+      return state.map(post => {
+        if(post.id === action.post.id) {
+          post = action.post
+        }
+        return post
+      })
     default:
       return state
   }

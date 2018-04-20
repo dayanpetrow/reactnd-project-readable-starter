@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchAllPosts, sortPosts } from '../../actions/posts';
+import { fetchAllPosts, sortPosts, deletePost, votePost } from '../../actions/posts';
 import { connect } from 'react-redux';
-import PostItem from './PostItem';
+import * as helpers from '../../utils/helpers';
 import { Link } from 'react-router-dom';
+
+import FaPlus from 'react-icons/lib/fa/plus'
+import FaMinus from 'react-icons/lib/fa/minus'
+import FaDelete from 'react-icons/lib/fa/trash'
+import FaEdit from 'react-icons/lib/fa/pencil-square'
 
 class PostsList extends Component {
   static propTypes = {
@@ -21,6 +26,18 @@ class PostsList extends Component {
   sortPosts(option) {
     this.props.sortPosts(option);
     this.setState({ sort: option });
+  }
+
+  deletePost(post_id) {
+    this.props.deletePost(post_id, () => {})
+  }
+
+  upVote(post_id) {
+    this.props.votePost(post_id, "upVote")
+  }
+
+  downVote(post_id) {
+    this.props.votePost(post_id, "downVote")
   }
 
   render() {
@@ -43,7 +60,29 @@ class PostsList extends Component {
           {posts.length > 0
             ?
             posts.map( post => (
-              <PostItem post={post} key={post.id} />
+              <div className="post-container" key={post.id}>
+
+                <div className="post-actions">
+                  <button className="delete-button" onClick={event => this.deletePost(post.id)}><FaDelete /> delete post</button>|
+                  <button className="edit-button" onClick={event => this.props.history.push(`/posts/${post.id}/edit`)}><FaEdit /> edit post</button>|
+                  <button className="upvote-button" onClick={event => this.upVote(post.id)}><FaPlus /> upvote</button>|
+                  <button className="downvote-button" onClick={event => this.downVote(post.id)}><FaMinus /> downvote</button>
+                </div>
+
+                <h3 className="post-title"><Link to={`/${post.category}/${post.id}`}>{ post.title }</Link></h3>
+
+                <p className="post-details">
+                  Posted by <span className="bold">{ post.author }</span> in <span className="bold">{ helpers.capitalize(post.category) }</span> on <span className="bold">{ helpers.printDate(post.timestamp) }</span>
+                </p>
+
+                <p className="post-content">{ post.body }</p>
+                <div className="post-counts">Votes: { post.voteScore }</div>
+                <div className="post-counts">Comments: { post.commentCount }</div>
+
+                <Link className="read-post" to={`/${post.category}/${post.id}`}>
+                  Read post
+                </Link>
+              </div>
             ))
             :
             <div className="no-posts">
@@ -68,5 +107,7 @@ function mapStateToProps({ posts }, { match }) {
 
 export default connect(mapStateToProps, {
   fetchAllPosts,
-  sortPosts
+  sortPosts,
+  deletePost,
+  votePost
 })(PostsList)
