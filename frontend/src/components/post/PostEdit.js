@@ -12,7 +12,8 @@ class PostEdit extends Component {
     this.handleContentChange = this.handleContentChange.bind(this);
     this.state = {
       body: '',
-      title: ''
+      title: '',
+      error_found: false
     }
   }
 
@@ -39,6 +40,10 @@ class PostEdit extends Component {
 
   editPost = (event) => {
     event.preventDefault();
+    if(this.state.title === '' || this.state.body === '') {
+      this.setState({ error_found: true });
+      return
+    }
     const new_values = {
       title: this.state.title,
       body: this.state.body,
@@ -54,9 +59,14 @@ class PostEdit extends Component {
         <div className="post-container">
           <h3 className="post-title">Edit post:</h3>
 
+
           <p>Post ID: { post.id }</p>
           <p>Category: { helpers.capitalize(post.category) }</p>
 
+          {this.state.error_found &&
+            <div className="error-found">All fields are mandatory!</div>
+          }
+          
           <form onSubmit={this.editPost}>
             <label htmlFor="title">Title</label>
             <input type="text" id="title" onChange={this.handleTitleChange} name="title" size="35" value={this.state.title} />

@@ -8,12 +8,20 @@ import { connect } from 'react-redux';
 
 class PostNew extends Component {
   static propTypes = {
-    categories: PropTypes.array
+    categories: PropTypes.array,
+  }
+
+  state = {
+    error_found: false
   }
 
   submitPost = (event) => {
     event.preventDefault();
     const _ = event.target
+    if(_.title.value === '' || _.content.value === '' || _.author.value === '') {
+      this.setState({ error_found: true });
+      return
+    }
     const post = {
       id: helpers.generateId(),
       timestamp: Date.now(),
@@ -32,6 +40,10 @@ class PostNew extends Component {
         <div className="post-container">
           <h3 className="post-title">Add new post:</h3>
 
+          {this.state.error_found &&
+            <div className="error-found">All fields are mandatory!</div>
+          }
+          
           <form onSubmit={this.submitPost}>
             <label htmlFor="title">Title</label>
             <input type="text" id="title" name="title" size="35"/>

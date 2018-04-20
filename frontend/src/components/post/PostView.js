@@ -21,7 +21,8 @@ class PostView extends Component {
   }
 
   state = {
-    showNewComment: false
+    showNewComment: false,
+    empty_comment_error: false
   }
 
   showComment() {
@@ -50,6 +51,10 @@ class PostView extends Component {
     const { post } = this.props
     event.preventDefault();
     const _ = event.target
+    if(_.comment_content.value === '' || _.comment_author.value === '') {
+      this.setState({ empty_comment_error: true });
+      return
+    }
     const comment = {
       id: helpers.generateId(),
       timestamp: Date.now(),
@@ -96,6 +101,9 @@ class PostView extends Component {
             {this.state.showNewComment
               ?
               <div className="comment">
+                {this.state.empty_comment_error &&
+                  <div className="error-found">All fields are mandatory!</div>
+                }
                 <form onSubmit={this.addComment}>
                   <label htmlFor="comment_author">Author</label>
                   <input type="text" id="comment_author" name="comment_author" size="35"/>

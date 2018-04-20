@@ -22,7 +22,8 @@ class SingleComment extends Component {
     this.state = {
       comment: this.props.comment.body,
       read_mode: true,
-      localVoteScore: this.props.comment.voteScore
+      localVoteScore: this.props.comment.voteScore,
+      empty_comment_error: false
     }
   }
 
@@ -51,6 +52,10 @@ class SingleComment extends Component {
 
   editComment = (event) => {
     event.preventDefault();
+    if(this.state.comment === '') {
+      this.setState({ empty_comment_error: true })
+      return
+    }
     const new_values = {
       timestamp: Date.now(),
       body: this.state.comment,
@@ -81,6 +86,9 @@ class SingleComment extends Component {
             <p className="comment-content">{ comment.body }</p>
             :
             <form onSubmit={this.editComment}>
+              {this.state.empty_comment_error &&
+                <div className="error-found">The field is mandatory!</div>
+              }
               <textarea className="comment-textarea" type="text" id="body" name="body" onChange={this.handleCommentChange} rows="2" cols="60" value={this.state.comment} />
               <div className="inline-buttons">
                 <button type="submit">Update comment</button>
