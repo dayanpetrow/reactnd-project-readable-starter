@@ -20,7 +20,7 @@ class PostsList extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllPosts()
+    this.props.fetchAllPosts();
   }
 
   sortPosts(option) {
@@ -44,6 +44,7 @@ class PostsList extends Component {
     const { posts } = this.props
     return (
         <div className="container">
+
           {posts.length > 1 &&
             <div className="sorts">
               Sort by:
@@ -62,6 +63,7 @@ class PostsList extends Component {
               <div className="post-container" key={post.id}>
 
                 <div className="post-actions">
+                  <h1>{ this.props.categories }</h1>
                   <button className="delete-button" onClick={event => this.deletePost(post.id)}><FaDelete /> delete post</button>|
                   <button className="edit-button" onClick={event => this.props.history.push(`/posts/${post.id}/edit`)}><FaEdit /> edit post</button>|
                   <button className="upvote-button" onClick={event => this.upVote(post.id)}><FaPlus /> upvote</button>|

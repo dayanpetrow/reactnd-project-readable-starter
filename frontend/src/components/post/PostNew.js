@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
 import * as helpers from '../../utils/helpers';
-import { fetchCategories } from '../../actions/categories';
+//import { fetchCategories } from '../../actions/categories';
 import { addPost } from '../../actions/posts';
 import { connect } from 'react-redux';
 
@@ -43,7 +42,7 @@ class PostNew extends Component {
           {this.state.error_found &&
             <div className="error-found">All fields are mandatory!</div>
           }
-          
+
           <form onSubmit={this.submitPost}>
             <label htmlFor="title">Title</label>
             <input type="text" id="title" name="title" size="35"/>
@@ -77,6 +76,5 @@ function mapStateToProps({ categories }) {
 }
 
 export default connect(mapStateToProps, {
-  fetchCategories,
   addPost
 })(PostNew)
