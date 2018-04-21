@@ -44,7 +44,6 @@ class PostsList extends Component {
     const { posts } = this.props
     return (
         <div className="container">
-
           {posts.length > 1 &&
             <div className="sorts">
               Sort by:

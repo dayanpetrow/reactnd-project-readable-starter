@@ -9,6 +9,7 @@ import PostsList from './post/PostsList';
 import PostView from './post/PostView';
 import PostNew from './post/PostNew';
 import PostEdit from './post/PostEdit';
+import NotFound from './NotFound';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/posts/:postId/edit" component={PostEdit} />
           <Route exact path="/:category" component={PostsList} />
           <Route exact path="/:category/:postId" component={PostView} />
+          <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
       </div>
