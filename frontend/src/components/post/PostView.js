@@ -52,7 +52,8 @@ class PostView extends Component {
     const { post } = this.props
     event.preventDefault();
     const _ = event.target
-    if(_.comment_content.value === '' || _.comment_author.value === '') {
+    if(_.comment_content.value === '' || _.comment_author.value === ''
+        || _.comment_content.value.trim() === '' || _.comment_author.value.trim() === '') {
       this.setState({ empty_comment_error: true });
       return
     }

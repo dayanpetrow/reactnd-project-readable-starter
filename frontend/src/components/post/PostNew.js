@@ -17,7 +17,9 @@ class PostNew extends Component {
   submitPost = (event) => {
     event.preventDefault();
     const _ = event.target
-    if(_.title.value === '' || _.content.value === '' || _.author.value === '') {
+    if(_.title.value === '' || _.content.value === '' || _.author.value === ''
+        || _.title.value.trim() === '' || _.content.value.trim() === ''
+          || _.author.value.trim() === '') {
       this.setState({ error_found: true });
       return
     }
