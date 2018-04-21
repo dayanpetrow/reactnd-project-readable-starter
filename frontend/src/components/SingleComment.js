@@ -103,9 +103,7 @@ class SingleComment extends Component {
 }
 
 function mapStateToProps({ comments }) {
-  return {
-    comments: comments
-  }
+  return { comments: comments }
 }
 
 export default connect(mapStateToProps, {

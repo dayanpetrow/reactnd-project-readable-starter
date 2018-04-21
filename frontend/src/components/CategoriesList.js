@@ -30,11 +30,7 @@ class CategoriesList extends Component {
 }
 
 function mapStateToProps({ categories }) {
-  return {
-    categories: categories
-  }
+  return { categories: categories }
 }
 
-export default connect(mapStateToProps, {
-  fetchCategories
-})(CategoriesList)
+export default connect(mapStateToProps, {fetchCategories})(CategoriesList)
